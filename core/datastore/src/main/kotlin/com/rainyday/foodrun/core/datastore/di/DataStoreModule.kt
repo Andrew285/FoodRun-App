@@ -1,4 +1,4 @@
-package di
+package com.rainyday.foodrun.core.datastore.di
 
 import dagger.Module
 import dagger.hilt.InstallIn

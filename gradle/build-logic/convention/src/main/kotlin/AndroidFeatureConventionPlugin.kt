@@ -14,6 +14,9 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("navigation.compose").get())
                 add("implementation", libs.findLibrary("lifecycle.viewmodel.compose").get())
                 add("implementation", libs.findLibrary("coroutines.android").get())
+                add("implementation", libs.findLibrary("retrofit").get())
+                add("implementation", libs.findLibrary("retrofit.gson").get())
+                add("implementation", libs.findLibrary("okhttp.logging").get())
             }
         }
     }

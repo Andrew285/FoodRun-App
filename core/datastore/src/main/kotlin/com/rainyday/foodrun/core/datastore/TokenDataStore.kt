@@ -1,3 +1,5 @@
+package com.rainyday.foodrun.core.datastore
+
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,12 +9,13 @@ import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 import javax.inject.Singleton
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "foodrun_prefs")
 
 @Singleton
-class TokenDataStore constructor(
+class TokenDataStore @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     private val TOKEN_KEY = stringPreferencesKey("jwt_token")

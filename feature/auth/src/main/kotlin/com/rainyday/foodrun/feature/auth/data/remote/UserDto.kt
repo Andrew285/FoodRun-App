@@ -1,4 +1,4 @@
-package com.rainyday.foodrun.core.network.model
+package com.rainyday.foodrun.feature.auth.data.remote
 
 data class UserDto(
     val id: String,
