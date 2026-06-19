@@ -17,7 +17,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
                 configureCompose(this)
             }
             dependencies {
-                add("implementation", libs.findLibrary("androidx-compose-bom").get())
+                add("implementation", platform(libs.findLibrary("androidx-compose-bom").get()))
                 add("implementation", libs.findLibrary("androidx-compose-ui").get())
                 add("implementation", libs.findLibrary("androidx-compose-ui-graphics").get())
                 add("implementation", libs.findLibrary("androidx-compose-ui-tooling-preview").get())
