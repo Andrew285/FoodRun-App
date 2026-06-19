@@ -2,6 +2,12 @@ plugins {
     `kotlin-dsl`
 }
 
+dependencies {
+    // Direct dependencies with explicit versions
+    implementation("com.android.tools.build:gradle:8.8.0")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.2.10")
+}
+
 gradlePlugin {
     plugins {
         register("androidLibrary") {

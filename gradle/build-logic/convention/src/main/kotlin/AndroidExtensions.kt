@@ -5,11 +5,11 @@ import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.getByType
 
-fun Project.configureAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *, *>
-) {
+// Використовуємо зірочки, але без дженериків у назві класу (або з 6-ма, залежно від версії)
+// Найстабільніший варіант — це приведення до типу всередині функції
+internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
     commonExtension.apply {
-        compileSdk = 35
+        compileSdk = 36
 
         defaultConfig {
             minSdk = 26
@@ -22,9 +22,7 @@ fun Project.configureAndroid(
     }
 }
 
-fun Project.configureCompose(
-    commonExtension: CommonExtension<*, *, *, *, *, *>
-) {
+internal fun Project.configureCompose(commonExtension: CommonExtension<*, *, *, *, *, *>) {
     commonExtension.apply {
         buildFeatures {
             compose = true

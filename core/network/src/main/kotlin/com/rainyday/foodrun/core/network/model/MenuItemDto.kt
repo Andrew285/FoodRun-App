@@ -1,0 +1,12 @@
+package com.rainyday.foodrun.core.network.model
+
+data class MenuItemDto(
+    val id: String,
+    val name: String,
+    val description: String,
+    val price: Double,
+    val imageUrl: String,
+    val category: String,
+    val isAvailable: Boolean,
+    val restaurantId: String
+)
