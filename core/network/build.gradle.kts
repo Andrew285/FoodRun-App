@@ -7,3 +7,7 @@ plugins {
 android {
     namespace = "com.rainyday.foodrun.core.network"
 }
+
+dependencies {
+    implementation(project(":core:datastore"))
+}

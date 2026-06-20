@@ -17,6 +17,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("retrofit").get())
                 add("implementation", libs.findLibrary("retrofit.gson").get())
                 add("implementation", libs.findLibrary("okhttp.logging").get())
+                add("implementation", libs.findLibrary("coil.compose").get())
             }
         }
     }

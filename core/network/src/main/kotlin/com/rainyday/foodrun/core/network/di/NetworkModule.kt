@@ -1,6 +1,6 @@
 package com.rainyday.foodrun.core.network.di
 
-import com.rainyday.foodrun.core.network.api.FoodRunApi
+import com.rainyday.foodrun.core.network.interceptors.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -9,8 +9,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
-import retrofit2.http.POST
 import javax.inject.Singleton
 
 @Module
@@ -19,13 +17,14 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttp(): OkHttpClient {
+    fun provideOkHttp(authInterceptor: AuthInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 }
             )
+            .addInterceptor(authInterceptor)
             .build()
     }
 
@@ -37,11 +36,5 @@ class NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideFoodRunApi(retrofit: Retrofit): FoodRunApi {
-        return retrofit.create(FoodRunApi::class.java)
     }
 }

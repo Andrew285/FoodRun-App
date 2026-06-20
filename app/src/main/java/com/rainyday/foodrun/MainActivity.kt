@@ -10,6 +10,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.rainyday.foodrun.feature.auth.presentation.navigation.LOGIN_ROUTE
 import com.rainyday.foodrun.feature.auth.presentation.navigation.authNavGraph
+import com.rainyday.foodrun.feature.home.presentation.HOME_ROUTE
+import com.rainyday.foodrun.feature.home.presentation.homeNavGraph
 import com.rainyday.foodrun.ui.theme.FoodRunTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,8 +31,13 @@ class MainActivity : ComponentActivity() {
                         authNavGraph(
                             navController = navController,
                             onAuthSuccess = {
-                                // TODO: navigate to home screen
+                                navController.navigate(HOME_ROUTE) {
+                                    popUpTo(LOGIN_ROUTE) { inclusive = true }
+                                }
                             }
+                        )
+                        homeNavGraph(
+                            navController = navController
                         )
                     }
                 }
