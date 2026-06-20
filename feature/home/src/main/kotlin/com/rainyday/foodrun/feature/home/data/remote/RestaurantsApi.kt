@@ -12,9 +12,4 @@ interface RestaurantsApi {
         @Query("category") category: String? = null,
         @Query("search") search: String? = null
     ): RestaurantsResponseDto
-
-    @GET("restaurants/{id}")
-    suspend fun getRestaurantById(
-        @Path("id") id: String
-    ): RestaurantDetailDto
 }

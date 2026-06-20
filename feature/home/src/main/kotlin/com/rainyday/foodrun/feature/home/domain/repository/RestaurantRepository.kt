@@ -1,6 +1,5 @@
 package com.rainyday.foodrun.feature.home.domain.repository
 
-import com.rainyday.foodrun.feature.home.domain.model.RestaurantDetailDomain
 import com.rainyday.foodrun.feature.home.domain.model.RestaurantDomain
 
 interface RestaurantRepository {
@@ -10,7 +9,4 @@ interface RestaurantRepository {
         category: String? = null,
         search: String? = null
     ): Result<List<RestaurantDomain>>
-
-
-    suspend fun getRestaurantById(id: String): Result<RestaurantDetailDomain>
 }

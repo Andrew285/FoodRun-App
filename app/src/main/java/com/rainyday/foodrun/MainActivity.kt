@@ -6,22 +6,32 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.rainyday.foodrun.core.network.AuthEventBus
+import com.rainyday.foodrun.core.network.AuthState
 import com.rainyday.foodrun.feature.auth.presentation.navigation.LOGIN_ROUTE
 import com.rainyday.foodrun.feature.auth.presentation.navigation.authNavGraph
 import com.rainyday.foodrun.feature.home.presentation.HOME_ROUTE
 import com.rainyday.foodrun.feature.home.presentation.homeNavGraph
+import com.rainyday.foodrun.feature.restaurant.presentation.restaurantDetailNavGraph
+import com.rainyday.foodrun.feature.restaurant.presentation.restaurantDetailRoute
 import com.rainyday.foodrun.ui.theme.FoodRunTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 const val SPLASH_ROUTE = "splash"
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var authEventBus: AuthEventBus
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,6 +39,17 @@ class MainActivity : ComponentActivity() {
             FoodRunTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     val navController = rememberNavController()
+
+                    LaunchedEffect(Unit) {
+                        authEventBus.events.collect { event ->
+                            if (event == AuthState.Unauthorized) {
+                                navController.navigate(LOGIN_ROUTE) {
+                                    popUpTo(0) { inclusive = true }
+                                }
+                            }
+                        }
+                    }
+
                     NavHost(
                         navController = navController,
                         startDestination = SPLASH_ROUTE
@@ -56,7 +77,16 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                         homeNavGraph(
-                            navController = navController
+                            navController = navController,
+                            onRestaurantClick = { restaurantId ->
+                                navController.navigate(restaurantDetailRoute(restaurantId))
+                            }
+                        )
+                        restaurantDetailNavGraph(
+                            navController = navController,
+                            onAddToCart = { id, name, price ->
+                                // TODO: feature:cart
+                            }
                         )
                     }
                 }

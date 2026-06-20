@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    compileOnly("com.android.tools.build:gradle:8.8.0")
+    compileOnly("com.android.tools.build:gradle:8.10.1")
 }

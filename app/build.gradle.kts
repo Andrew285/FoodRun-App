@@ -117,6 +117,7 @@ dependencies {
     // Feature modules
     implementation(project(":feature:auth"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:restaurant"))
     implementation(project(":core:network"))
     implementation(project(":core:datastore"))
 }

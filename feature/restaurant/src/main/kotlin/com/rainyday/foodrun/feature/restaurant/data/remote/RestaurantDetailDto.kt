@@ -1,4 +1,6 @@
-package com.rainyday.foodrun.feature.home.data.remote
+package com.rainyday.foodrun.feature.restaurant.data.remote
+
+import com.rainyday.foodrun.core.data.remote.MenuItemDto
 
 data class RestaurantDetailDto(
     val id: String,

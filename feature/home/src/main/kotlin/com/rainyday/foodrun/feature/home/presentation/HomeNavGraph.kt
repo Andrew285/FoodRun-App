@@ -7,13 +7,10 @@ import androidx.navigation.compose.composable
 const val HOME_ROUTE = "home_root"
 
 fun NavGraphBuilder.homeNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    onRestaurantClick: (String) -> Unit
 ) {
     composable(HOME_ROUTE) {
-        HomeScreen(
-            onRestaurantClick = { restaurantId ->
-                // TODO: navigate to restaurant detail
-            }
-        )
+        HomeScreen(onRestaurantClick = onRestaurantClick)
     }
 }

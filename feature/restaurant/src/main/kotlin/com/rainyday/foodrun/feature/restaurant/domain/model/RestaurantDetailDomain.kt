@@ -1,4 +1,6 @@
-package com.rainyday.foodrun.feature.home.domain.model
+package com.rainyday.foodrun.feature.restaurant.domain.model
+
+import com.rainyday.foodrun.core.domain.model.MenuItemDomain
 
 data class RestaurantDetailDomain(
     val id: String,

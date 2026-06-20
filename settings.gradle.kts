@@ -21,6 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "FoodRun"
 include(":app")
+include(":core:data")
 include(":core:network")
 include(":core:domain")
 include(":core:ui")
