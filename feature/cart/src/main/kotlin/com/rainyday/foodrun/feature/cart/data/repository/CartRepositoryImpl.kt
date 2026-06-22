@@ -7,8 +7,9 @@ import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
 import com.rainyday.foodrun.feature.cart.domain.repository.CartRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class CartRepositoryImpl(
+class CartRepositoryImpl @Inject constructor(
     private val dao: CartDao
 ): CartRepository {
     override fun getCartItems(): Flow<List<CartItemDomain>> =

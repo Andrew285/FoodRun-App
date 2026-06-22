@@ -17,23 +17,12 @@ import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
-    onBack: () -> Unit,
     onCheckout: () -> Unit,
     viewModel: CartViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Кошик") },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Назад")
-                    }
-                }
-            )
-        },
         bottomBar = {
             if (!uiState.isEmpty) {
                 BottomAppBar {
