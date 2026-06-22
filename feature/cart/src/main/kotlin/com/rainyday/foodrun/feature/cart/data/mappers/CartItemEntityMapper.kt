@@ -1,7 +1,7 @@
 package com.rainyday.foodrun.feature.cart.data.mappers
 
+import com.rainyday.foodrun.core.domain.model.CartItemDomain
 import com.rainyday.foodrun.feature.cart.data.local.CartEntity
-import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
 
 
 fun CartItemDomain.toEntity() = CartEntity(

@@ -1,6 +1,6 @@
-package com.rainyday.foodrun.feature.cart.domain.repository
+package com.rainyday.foodrun.core.domain.repository
 
-import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
+import com.rainyday.foodrun.core.domain.model.CartItemDomain
 import kotlinx.coroutines.flow.Flow
 
 interface CartRepository {

@@ -27,12 +27,16 @@ import com.rainyday.foodrun.core.network.AuthEventBus
 import com.rainyday.foodrun.core.network.AuthState
 import com.rainyday.foodrun.feature.auth.presentation.navigation.LOGIN_ROUTE
 import com.rainyday.foodrun.feature.auth.presentation.navigation.authNavGraph
-import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
+import com.rainyday.foodrun.core.domain.model.CartItemDomain
 import com.rainyday.foodrun.feature.cart.presentation.CART_ROUTE
 import com.rainyday.foodrun.feature.cart.presentation.CartViewModel
 import com.rainyday.foodrun.feature.cart.presentation.cartNavGraph
 import com.rainyday.foodrun.feature.home.presentation.HOME_ROUTE
 import com.rainyday.foodrun.feature.home.presentation.homeNavGraph
+import com.rainyday.foodrun.feature.order.presentation.checkout.checkoutNavGraph
+import com.rainyday.foodrun.feature.order.presentation.checkout.checkoutRoute
+import com.rainyday.foodrun.feature.order.presentation.order_tracking.orderTrackingNavGraph
+import com.rainyday.foodrun.feature.order.presentation.order_tracking.orderTrackingRoute
 import com.rainyday.foodrun.feature.restaurant.presentation.restaurantDetailNavGraph
 import com.rainyday.foodrun.feature.restaurant.presentation.restaurantDetailRoute
 import com.rainyday.foodrun.ui.theme.FoodRunTheme
@@ -150,7 +154,27 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                             cartNavGraph(
-                                onCheckout = { /* TODO: feature:order */ }
+                                onCheckout = { restaurantId ->
+                                    navController.navigate(checkoutRoute(restaurantId)) {
+                                        popUpTo(CART_ROUTE) { inclusive = false }
+                                    }
+                                }
+                            )
+                            checkoutNavGraph(
+                                navController = navController,
+                                onOrderPlaced = { orderId ->
+                                    navController.navigate(orderTrackingRoute(orderId)) {
+                                        popUpTo(CART_ROUTE) { inclusive = true }
+                                    }
+                                }
+                            )
+                            orderTrackingNavGraph(
+                                navController = navController,
+                                onBackToHome = {
+                                    navController.navigate(HOME_ROUTE) {
+                                        popUpTo(0) { inclusive = true }
+                                    }
+                                }
                             )
                         }
                     }

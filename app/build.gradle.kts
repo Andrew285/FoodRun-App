@@ -119,6 +119,7 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:restaurant"))
     implementation(project(":feature:cart"))
+    implementation(project(":feature:order"))
     implementation(project(":core:network"))
     implementation(project(":core:datastore"))
     implementation(project(":core:domain"))

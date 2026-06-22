@@ -1,7 +1,7 @@
 package com.rainyday.foodrun.feature.cart.domain.usecases
 
-import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
-import com.rainyday.foodrun.feature.cart.domain.repository.CartRepository
+import com.rainyday.foodrun.core.domain.model.CartItemDomain
+import com.rainyday.foodrun.core.domain.repository.CartRepository
 import javax.inject.Inject
 
 class AddToCartUseCase @Inject constructor(

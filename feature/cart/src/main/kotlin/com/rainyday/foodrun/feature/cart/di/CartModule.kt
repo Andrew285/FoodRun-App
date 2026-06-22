@@ -2,10 +2,10 @@ package com.rainyday.foodrun.feature.cart.di
 
 import android.content.Context
 import androidx.room.Room
+import com.rainyday.foodrun.core.domain.repository.CartRepository
 import com.rainyday.foodrun.feature.cart.data.local.CartDao
 import com.rainyday.foodrun.feature.cart.data.local.CartDatabase
 import com.rainyday.foodrun.feature.cart.data.repository.CartRepositoryImpl
-import com.rainyday.foodrun.feature.cart.domain.repository.CartRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

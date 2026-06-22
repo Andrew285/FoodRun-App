@@ -1,4 +1,4 @@
-package com.rainyday.foodrun.feature.cart.domain.model
+package com.rainyday.foodrun.core.domain.model
 
 data class CartItemDomain(
     val menuItemId: String,

@@ -2,7 +2,7 @@ package com.rainyday.foodrun.feature.cart.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
+import com.rainyday.foodrun.core.domain.model.CartItemDomain
 import com.rainyday.foodrun.feature.cart.domain.usecases.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -34,6 +34,9 @@ class CartViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue = CartUiState(isLoading = true)
         )
+
+    val restaurantId: String?
+        get() = uiState.value.items.firstOrNull()?.restaurantId
 
     fun addItem(item: CartItemDomain) = viewModelScope.launch {
         val existing = uiState.value.items.find { it.menuItemId == item.menuItemId }

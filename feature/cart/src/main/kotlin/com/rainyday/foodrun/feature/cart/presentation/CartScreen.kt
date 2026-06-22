@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -12,12 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
+import com.rainyday.foodrun.core.domain.model.CartItemDomain
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(
-    onCheckout: () -> Unit,
+    onCheckout: (restaurantId: String) -> Unit,
     viewModel: CartViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -37,7 +36,10 @@ fun CartScreen(
                             text = "Разом: ${"%.2f".format(uiState.totalPrice)} грн",
                             style = MaterialTheme.typography.titleMedium
                         )
-                        Button(onClick = onCheckout) {
+                        Button(onClick = {
+                            val restaurantId = uiState.items.firstOrNull()?.restaurantId ?: return@Button
+                            onCheckout(restaurantId)
+                        }) {
                             Text("Оформити замовлення")
                         }
                     }

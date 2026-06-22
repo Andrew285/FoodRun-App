@@ -7,13 +7,9 @@ import androidx.navigation.compose.composable
 const val CART_ROUTE = "cart_route"
 
 fun NavGraphBuilder.cartNavGraph(
-    onCheckout: () -> Unit
+    onCheckout: (restaurantId: String) -> Unit
 ) {
     composable(CART_ROUTE) {
-        CartScreen(
-            onCheckout = {
-                // TODO: checkout
-            }
-        )
+        CartScreen(onCheckout = onCheckout)
     }
 }
