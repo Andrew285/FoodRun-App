@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,6 +16,9 @@ import com.rainyday.foodrun.core.network.AuthEventBus
 import com.rainyday.foodrun.core.network.AuthState
 import com.rainyday.foodrun.feature.auth.presentation.navigation.LOGIN_ROUTE
 import com.rainyday.foodrun.feature.auth.presentation.navigation.authNavGraph
+import com.rainyday.foodrun.feature.cart.domain.model.CartItemDomain
+import com.rainyday.foodrun.feature.cart.presentation.CartViewModel
+import com.rainyday.foodrun.feature.cart.presentation.cartNavGraph
 import com.rainyday.foodrun.feature.home.presentation.HOME_ROUTE
 import com.rainyday.foodrun.feature.home.presentation.homeNavGraph
 import com.rainyday.foodrun.feature.restaurant.presentation.restaurantDetailNavGraph
@@ -49,6 +53,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
+                    val cartViewModel: CartViewModel = hiltViewModel()
 
                     NavHost(
                         navController = navController,
@@ -84,9 +89,22 @@ class MainActivity : ComponentActivity() {
                         )
                         restaurantDetailNavGraph(
                             navController = navController,
-                            onAddToCart = { id, name, price ->
-                                // TODO: feature:cart
+                            onAddToCart = { menuItem, restaurantId ->
+                                cartViewModel.addItem(
+                                    CartItemDomain(
+                                        menuItemId = menuItem.id,
+                                        restaurantId = restaurantId,
+                                        name = menuItem.name,
+                                        price = menuItem.price,
+                                        quantity = 1,
+                                        imageUrl = menuItem.imageUrl
+                                    )
+                                )
                             }
+                        )
+                        cartNavGraph(
+                            navController = navController,
+                            onCheckout = { /* TODO: feature:order */ }
                         )
                     }
                 }

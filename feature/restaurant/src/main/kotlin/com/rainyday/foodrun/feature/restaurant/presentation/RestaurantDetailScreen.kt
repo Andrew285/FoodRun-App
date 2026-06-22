@@ -28,7 +28,7 @@ import kotlin.collections.flatten
 fun RestaurantDetailScreen(
     onBack: () -> Unit,
     onAddToCart: (MenuItemDomain) -> Unit,
-    viewModel: RestaurantDetailViewModel = hiltViewModel()
+    viewModel: RestaurantDetailViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 

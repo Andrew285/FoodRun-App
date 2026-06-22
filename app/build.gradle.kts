@@ -118,6 +118,8 @@ dependencies {
     implementation(project(":feature:auth"))
     implementation(project(":feature:home"))
     implementation(project(":feature:restaurant"))
+    implementation(project(":feature:cart"))
     implementation(project(":core:network"))
     implementation(project(":core:datastore"))
+    implementation(project(":core:domain"))
 }
