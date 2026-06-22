@@ -7,10 +7,12 @@ import androidx.navigation.compose.composable
 const val HOME_ROUTE = "home_root"
 
 fun NavGraphBuilder.homeNavGraph(
-    navController: NavHostController,
-    onRestaurantClick: (String) -> Unit
+    onRestaurantClick: (String) -> Unit,
+    onLogout: () -> Unit
 ) {
     composable(HOME_ROUTE) {
-        HomeScreen(onRestaurantClick = onRestaurantClick)
+        HomeScreen(
+            onRestaurantClick = onRestaurantClick,
+            onLogout = onLogout)
     }
 }

@@ -42,9 +42,8 @@ class OrderTrackingViewModel @Inject constructor(
             while (isActive) {
                 fetchOrder()
                 val state = _uiState.value
-                // Зупиняємо polling якщо фінальний статус
                 if (state.isDelivered || state.isCancelled) break
-                delay(10_000) // кожні 10 секунд
+                delay(10_000)
             }
         }
     }

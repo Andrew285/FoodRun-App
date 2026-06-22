@@ -19,10 +19,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.rainyday.foodrun.core.datastore.TokenDataStore
 import com.rainyday.foodrun.core.network.AuthEventBus
 import com.rainyday.foodrun.core.network.AuthState
 import com.rainyday.foodrun.feature.auth.presentation.navigation.LOGIN_ROUTE
@@ -41,6 +43,7 @@ import com.rainyday.foodrun.feature.restaurant.presentation.restaurantDetailNavG
 import com.rainyday.foodrun.feature.restaurant.presentation.restaurantDetailRoute
 import com.rainyday.foodrun.ui.theme.FoodRunTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 const val SPLASH_ROUTE = "splash"
@@ -51,6 +54,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var authEventBus: AuthEventBus
+
+    @Inject
+    lateinit var tokenDataStore: TokenDataStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,9 +139,16 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                             homeNavGraph(
-                                navController = navController,
                                 onRestaurantClick = { restaurantId ->
                                     navController.navigate(restaurantDetailRoute(restaurantId))
+                                },
+                                onLogout = {
+                                    lifecycleScope.launch {
+                                        tokenDataStore.clearToken()
+                                        navController.navigate(LOGIN_ROUTE) {
+                                            popUpTo(0) { inclusive = true }
+                                        }
+                                    }
                                 }
                             )
                             restaurantDetailNavGraph(
